@@ -1,0 +1,42 @@
+class Solution {
+public:
+    stack<int> s1;
+    unordered_map<int,int> m;
+    string minRemoveToMakeValid(string s) {
+        string res="";
+        for(int i=0;i<s.length();i++)
+        {
+            if(s[i]=='('||s[i]==')')
+            {
+                if(s[i]=='(')
+                {
+                    s1.push(i);
+                }
+                else
+                {
+                    if(s1.empty())
+                    {
+                     m[i]++;
+                    }
+                    else
+                    {
+                        s1.pop();
+                    }
+                }
+            }
+        }
+        while(!s1.empty())
+        {
+            m[s1.top()]++;
+            s1.pop();
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            if(m.find(i)==m.end())
+            {
+                res+=s[i];
+            }
+        }
+        return res;
+    }
+};
