@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<string> res;
+    vector<string> removeInvalidParentheses(string s) {
+        remove(s,0,0,"()");
+        return res;
+        
+    }
+    void remove(string s,int start,int lr, string c)
+    {
+        for(int i=start,stack=0;i<s.length();i++)
+        {
+            if(s[i]==c[0])
+                stack++;
+            if(s[i]==c[1])
+                stack--;
+            if(stack>=0)
+                continue;
+            for(int j=lr;j<=i;j++)
+            {
+                if(s[j]==c[1] &&(j==lr || s[j-1] != c[1]))
+                {
+
+                    remove(s.substr(0,j)+s.substr(j+1),i,j,c);
+                }
+                    
+            }
+            return;
+        }
+        reverse(s.begin(),s.end());
+        if(c[0]=='(')
+        {
+            remove(s,0,0,")(");
+        }
+        else
+        {
+            res.push_back(s);
+        }
+    }
+};
