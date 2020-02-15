@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool canCross(vector<int>& stones) {
+        int n=stones.size();
+        for(int i=3;i<n;i++)
+        {
+            if(stones[i]>2*stones[i-1])
+                return false;
+        }
+        int laststone=stones[n-1];
+        stack<int> pos;
+        stack<int> dist;
+        pos.push(0);
+        dist.push(0);
+        while(!(pos.empty()))
+        {
+            int currpos=pos.top();
+            pos.pop();
+            int k=dist.top();
+            dist.pop();
+            
+            for(int i=k-1;i<=k+1;i++)
+            {
+                if(i<=0)
+                    continue;
+                if(currpos+i==laststone)
+                    return true;
+                if(find(stones.begin(),stones.end(),currpos+i)!= stones.end())
+                {
+                    
+                    pos.push(currpos+i);
+                    dist.push(i);
+                }
+            }
+        }
+        return false;
+    }
+};
