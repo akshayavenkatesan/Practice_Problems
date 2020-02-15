@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_map <int,int> map1;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(map1[nums[i]]==0)
+                map1[nums[i]]++;
+            else
+                return true;
+        }
+        return false;
+        
+    }
+};
