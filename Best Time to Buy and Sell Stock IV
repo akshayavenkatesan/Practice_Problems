@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxProfit(int k, vector<int>& prices) {
+        int n=prices.size();
+        if(n<2)
+            return 0;
+        if(k >= n/2) { 
+            int sum = 0;
+            for(int i = 1; i < n; ++i) 
+                sum += max(0, prices[i] - prices[i-1]);
+            return sum;
+        }
+        vector<vector<int>> T(k+1,vector<int>(n+1,0));
+        for(int i=1;i<=k;i++)
+        {
+            int maxcurr = -prices[0];
+            for(int j=1;j<n;j++)
+            {
+                T[i][j]=max(T[i][j-1],maxcurr+prices[j]);
+                maxcurr=max(maxcurr,T[i-1][j]-prices[j]);
+            }
+        }
+        return T[k][n-1];
+    }
+};
