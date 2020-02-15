@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int findNumberOfLIS(vector<int>& a) {
+  int n=a.size(),maxlen=1,tot=0;
+        int len[n+1],count[n+1];
+        memset(count,1,n);
+        memset(len,1,n);
+        for(int i=0;i<n;i++)
+        {
+        
+            len[i]=1;
+            count[i]=1;
+        }
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<i;j++)
+            {
+                if(a[j]<a[i])
+                {
+                    if(len[j]+1>len[i])
+                    {
+                        len[i]=len[j]+1;
+                        count[i]=count[j];
+                        maxlen=max(maxlen,len[i]);
+                    }
+                    else if(len[j]+1==len[i])
+                    {
+                        count[i]+=count[j];
+                    }
+                }
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+        
+            if(len[i]==maxlen)
+                tot+=count[i];
+        }
+
+        return tot;
+
+        
+        
+    }
+};
