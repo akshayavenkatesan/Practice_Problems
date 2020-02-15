@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<string>> suggestedProducts(vector<string>& p, string s) {
+        sort(p.begin(),p.end());
+        vector<vector<string>> res(s.length(),vector<string>{});
+        for(auto prod:p)
+        {
+            for(int i=0;i<s.length();i++)
+            {
+                if(s[i]==prod[i])
+                {
+                    res[i].push_back(prod);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        for(int i=0;i<res.size();i++)
+        {
+            if(res[i].size()>3)
+            {
+                res[i].resize(3);
+            }
+        }
+        return res;
+        
+    }
+};
