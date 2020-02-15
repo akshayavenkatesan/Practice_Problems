@@ -1,0 +1,73 @@
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& w) {
+        unordered_map<string,vector<string>> m;
+        string temp;
+        map<string,int> v;
+        int ans=0;
+        queue<string> q;
+        int count=0;
+        for(int i=0;i<w.size();i++)
+        {
+            for(int j=i+1;j<w.size();j++)
+            {
+                count=0;
+                for(int k=0;k<w[j].length();k++)
+                {
+                    if(w[i][k]!=w[j][k])
+                        count++;
+                }
+                if(count==1)
+                {
+                    m[w[i]].push_back(w[j]);
+                    m[w[j]].push_back(w[i]);
+                    
+                }
+                    
+            }
+        }
+        count=0;
+        for(int i=0;i<w.size();i++)
+        {
+            count=0;
+            for(int k=0;k<beginWord.length();k++)
+                if(beginWord[k] != w[i][k])
+                    count++;
+            if(count==1)
+            {
+                m[beginWord].push_back(w[i]);
+                m[w[i]].push_back(beginWord);
+                
+            }
+        }
+        // for(auto it =m.begin();it != m.end();++it)
+        // {
+        //     cout<<it->first<<" ";
+        //     for( auto k=it->second.begin();k!= it->second.end();++k)
+        //         cout<<*k<<" ";
+        //     cout<<endl;
+        // }
+        q.push(beginWord);
+        while(!q.empty())
+        {
+            ans++;
+            int s=q.size();
+            while(s>0)
+            {
+                string cur=q.front();
+                v[cur]=1;
+                q.pop();
+                if(cur==endWord)
+                    return ans;
+                for(auto it=m[cur].begin();it!=m[cur].end();it++)
+                    if(!v[*it])
+                    q.push(*it);
+                s--;
+            }
+            
+        }
+        return 0;
+        
+        
+    }
+};
