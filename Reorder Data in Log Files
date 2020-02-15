@@ -1,0 +1,32 @@
+class Solution {
+public:
+     static bool myfun(string s1,string s2)
+    {
+        int pos1=s1.find(' ');
+        int pos2=s2.find(' ');
+        
+        string t2=s1.substr(pos1+1);
+        string t4=s2.substr(pos2+1);
+        
+        if(isdigit(t2[0])&&isdigit(t4[0]))
+            return false;
+        if(isdigit(t2[0])&&!isdigit(t4[0]))
+            return false;
+        if(!isdigit(t2[0])&&isdigit(t4[0]))
+            return true;
+        
+        int a=t2.compare(t4);
+        if(a != 0)
+            return t2<t4;
+        return s1.compare(s2)<0;
+       
+        
+            
+    }
+    
+    vector<string> reorderLogFiles(vector<string>& logs) {
+        stable_sort(logs.begin(),logs.end(),myfun);
+        return logs;
+        
+    }
+};
