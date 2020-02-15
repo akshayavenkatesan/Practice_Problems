@@ -1,0 +1,71 @@
+class Solution {
+struct node
+{
+	int count;
+	node* next[26];
+	char c;
+	bool endofword;
+
+}*root;
+node *newnode()
+{
+	struct node* temp = new node();
+	temp->count=0;
+	temp->endofword=false;
+	for(int i=0;i<26;i++)
+	{
+		temp->next[i]=NULL;
+	}
+	return temp;
+}
+void inserts(string s)
+{
+	node *p=root;
+	for(int i=0;i<s.length();i++)
+	{
+		int index = s[i] -'a';
+		if(p->next[index] == NULL)
+		{
+			p->next[index]= newnode();
+		}
+		p->next[index]->count++;
+		p->next[index]->c=s[i];
+		p=p->next[index];
+
+	}
+	p->endofword=true;
+}
+    string prefix(string s,int x)
+    {
+        string res;
+        node *p=root;
+        for(int i=0;i<s.length();i++)
+        {
+            int index= s[i] - 'a';
+		if(p->next[index]->count==x)
+		{
+            res+=p->next[index]->c;
+            p=p->next[index];
+		}
+		else
+		{
+		    break;
+		}
+            
+        }    
+        return res;
+    }
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        int x=strs.size();
+        if(x==0)
+            return "";
+        root=newnode();
+        for (int i=0;i<x;i++)
+        {
+            inserts(strs[i]);
+        }
+        return prefix(strs[0],x);
+        
+    }
+};
