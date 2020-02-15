@@ -1,0 +1,36 @@
+struct comp
+{
+  bool operator()(vector<int> a,vector<int> b)
+  {
+      return a[1]>b[1];
+  }
+};
+class Solution {
+public:
+    priority_queue<vector<int>,vector<vector<int>>,comp> q;
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        sort(intervals.begin(),intervals.end());
+        for(int i=0;i<intervals.size();i++)
+        {
+            if(q.empty())
+                q.push(intervals[i]);
+            else
+            {
+                vector<int> x=q.top();
+                if(x[1]<=intervals[i][0])
+                {
+                    q.pop();
+                    x[1]=intervals[i][1];
+                    q.push(x);
+                    
+                }
+                else
+                {
+                    q.push(intervals[i]);
+                }
+            }
+        }
+        return q.size();
+        
+    }
+};
