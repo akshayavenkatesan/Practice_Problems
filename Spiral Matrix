@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& ma) {
+        vector<int> v;
+        int m=ma.size();
+        if(m==0)
+            return v;
+        int n=ma[0].size();
+        int i=0,j=0;
+        while(i<m && j<n)
+        {
+            for (int k=j;k<n;k++)
+            {
+                v.push_back(ma[i][k]);
+            }
+            i++;
+            if(i>=m)
+            {
+                break;
+            }
+            for(int k=i;k<m;k++)
+            {
+                v.push_back(ma[k][n-1]);
+            }
+            n--;
+            for(int k=n-1;k>=j;k--)
+            {
+                v.push_back(ma[m-1][k]);
+            }
+            m--;
+            if(j>=n)
+            {
+                break;
+            }
+            for(int k=m-1;k>=i;k--)
+            {
+                v.push_back(ma[k][j]);
+            }
+            j++;
+        }
+        return v;
+    }
+};
