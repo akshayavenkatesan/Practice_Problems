@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int m[129]={0};
+        if(s=="" || t=="" || s.length() < t.length())
+            return "";
+        int startindex=0,i=0,j=0,minlen=INT_MAX,count=0,flag=0;
+        for(i=0;i<t.length();i++)
+        {
+            m[t[i]]++;
+        }
+        i=0;
+        for(j=0;j<s.length();j++)
+        {
+            m[s[j]]--;
+            if(m[s[j]]>=0)
+            { 
+                count++;
+            }
+            while(count==t.length())
+            {
+                if(minlen>(j-i+1))
+                {
+                    flag=1;
+                    minlen=j-i+1;
+                    startindex=i;
+                }
+                m[s[i]]++;
+                if(m[s[i]]>0)
+                    count--;
+                i++;
+                
+            }
+            
+        }
+        if(flag==0)
+            return "";
+        return s.substr(startindex,minlen);
+        
+    }
+};
