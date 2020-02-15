@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& in) {
+        sort(in.begin(),in.end());
+        vector<vector<int>> v;
+        int n=in.size();
+        if(n==0)
+            return v;
+        v.push_back(in[0]);
+
+        for(int i=1;i<n;i++)
+        {
+            int m= v.size();
+            if(v[m-1][1]>=in[i][0])
+            {
+                v[m-1][1]=max(in[i][1],v[m-1][1]);
+            }
+            else
+            {
+                v.push_back(in[i]);
+            }
+            
+        }
+            
+        return v;
+    }
+
+};
