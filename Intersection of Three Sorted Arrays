@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> arraysIntersection(vector<int>& a1, vector<int>& a2, vector<int>& a3) {
+        int i=0,j=0,k=0;
+        int p=a1.size(),q=a2.size(),r=a3.size();
+        vector<int> ans;
+        while(i<p && j<q && k<r)
+        {
+             if(a1[i]==a2[j] && a2[j]==a3[k])
+             {
+                 ans.push_back(a1[i]);
+                 i++;
+                 j++;
+                 k++;
+                 continue;
+             }
+            int x=max(a1[i],max(a2[j],a3[k]));
+            while(i<p && a1[i]<x)
+                i++;
+            while(j<q && a2[j]<x)
+                j++;
+            while(k<r && a3[k]<x)
+                k++;
+
+        }
+        return ans;
+        
+    }
+};
