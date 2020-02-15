@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        if(n==0)
+        {
+            return;
+        }
+        if(k>=n && k%n==0)
+        {
+            return;
+        }
+        else if(k>=n)
+        {
+           int m=k/n;
+            k=k-(m*n);
+        }
+        reverse(nums.begin(),nums.begin()+(n-k)); 
+
+        reverse(nums.begin()+(n-k),nums.end());
+        reverse(nums.begin(),nums.end());   
+    }
+};
