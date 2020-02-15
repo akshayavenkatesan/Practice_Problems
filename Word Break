@@ -1,0 +1,21 @@
+class Solution {
+    unordered_map<string,bool> m;
+public:
+    bool wordBreak(string s, vector<string>& v) {
+        int n=s.length();
+        if(n==0)
+            return true;
+        if(m.find(s) != m.end())
+            return m[s];
+        for(int i=1;i<=n;i++)
+        {
+            if(std::find(v.begin(),v.end(),s.substr(0,i)) != v.end() && wordBreak(s.substr(i,n-i),v))
+            {
+                m[s.substr(i,n-i)]=true;
+                return true;
+            }
+        }
+        m[s]=false;
+    return false;
+    }
+};
