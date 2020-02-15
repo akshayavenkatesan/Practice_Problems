@@ -1,0 +1,14 @@
+class Solution {
+public:
+    string toLowerCase(string str) {
+        string result ="";
+        int i=0;
+        while(str[i])
+        {
+            char c = tolower(str[i]);
+            result+=c;
+            i++;
+        }
+        return result;
+    }
+};
