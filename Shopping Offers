@@ -1,0 +1,37 @@
+class Solution {
+public:
+    map<vector<int>,int> map1;
+    int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
+        if(map1[needs])
+            return map1[needs];
+         int res=total(price,needs),i;
+        for(vector<int>s:special)
+        {
+            vector<int> clone(needs);
+            for(i=0;i<needs.size();i++)
+            {
+                if(needs[i]<s[i])
+                    break;
+                clone[i]=clone[i]-s[i];
+            }
+            if(i==needs.size())
+            {
+                res=min(res,s[i]+shoppingOffers(price,special,clone));
+            }
+        }
+        map1[needs]=res;
+        return res;
+        
+        
+    }
+
+    int total(vector<int>&price,vector<int>& needs)
+    {
+        int tot=0;
+        for(int i=0;i<price.size();i++)
+        {
+            tot+=price[i]*needs[i];
+        }
+        return tot;
+    }
+};
