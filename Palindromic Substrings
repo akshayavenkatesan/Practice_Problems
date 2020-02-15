@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int dp[s.length()][s.length()]={0};
+        int n=s.length();
+        int count=0,i,k,j;
+        for(i=0;i<s.length();i++)
+        {
+            dp[i][i]=1;
+            count++;
+            
+        }
+            
+        
+        for(int i=0;i<n-1;i++)
+        {
+            if(s[i]==s[i+1])
+            {
+                dp[i][i+1]=1;
+                count++;
+            }
+        }
+        for(k=3;k<=n;k++)
+        {
+            for(i=0;i<=n-k;i++)
+            {
+                j=i+k-1;
+                if(dp[i+1][j-1]&&s[i]==s[j])
+                {
+                    dp[i][j]=1;
+                    count++;
+                }
+            }
+        }
+        return count;
+        
+    }
+};
