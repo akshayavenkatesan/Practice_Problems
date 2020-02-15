@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<string> result;
+     map<char,string> m={{'2',"abc"},{'3',"def"},{'4',"ghi"},{'5',"jkl"},{'6',"mno"},{'7',"pqrs"},{'8',"tuv"},{'9',"wxyz"}};
+    vector<string> letterCombinations(string digits) 
+    {
+        if(digits.length()==0)
+            return result;
+        helper("",0,digits);
+        return result;
+    }
+    void helper(string curr,int index,string digits)
+    {
+        if(index==digits.length())
+        {
+            result.push_back(curr);
+            return;
+        }
+        string letter=m[digits[index]];
+        for(int i=0;i<letter.length();i++)
+        {
+            helper(curr+letter[i],index+1,digits);
+        }   
+    }
+};
