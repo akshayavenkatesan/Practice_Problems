@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int numJewelsInStones(string J, string S) {
+        int count1=0;
+        for(char c:S)
+        {
+            if(count(J.begin(),J.end(),c))
+            {
+                count1++;
+            }
+        }
+        return count1;
+    }
+};
