@@ -1,0 +1,22 @@
+class Solution {
+public:
+    set<vector<int>> ans;
+    void help(vector<int> nums,vector<int> curr,int index)
+    {
+        sort(curr.begin(),curr.end());
+        ans.insert(curr);
+        for(int i=index;i<nums.size();i++)
+        {
+            curr.push_back(nums[i]);
+            help(nums,curr,i+1);
+            curr.pop_back();
+        }
+        return;
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<int> curr;
+        help(nums,curr,0);
+        return vector<vector<int>>(ans.begin(),ans.end());
+        
+    }
+};
